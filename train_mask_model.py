@@ -5,9 +5,7 @@ from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 
-# -------------------------------
-# 1. Data Preparation
-# -------------------------------
+
 img_size = 224
 batch_size = 32
 
@@ -35,9 +33,7 @@ val_generator = train_datagen.flow_from_directory(
     subset='validation'
 )
 
-# -------------------------------
-# 2. CNN Model - MobileNetV2
-# -------------------------------
+
 base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 base_model.trainable = False  # freeze pre-trained layers
 
@@ -49,13 +45,8 @@ output = Dense(2, activation='softmax')(x)  # 2 classes: with_mask, without_mask
 model = Model(inputs=base_model.input, outputs=output)
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-# -------------------------------
-# 3. Train Model
-# -------------------------------
+
 model.fit(train_generator, validation_data=val_generator, epochs=10)
 
-# -------------------------------
-# 4. Save Model
-# -------------------------------
 model.save("")
 print("✅ Model saved as mask_detector_model.h5")
