@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Face Mask Detection</title>
+    <style>
+        body{
+            text-align:center;
+            background-color:white;
+        }
+        h1{
+            margin-top:40px;
+        }
+        #video{
+            border:2px solid #000;
+            margin-top:20px;
+        }
+    </style>
 </head>
 <body>
-    <h1 style="text-align:center;">😷 Face Mask Detection in Real-Time</h1>
-    <div style="text-align:center;">
-        <img src="{{ url_for('video') }}" width="720" height="560">
-    </div>
+    <h1>Face Mask Detection in Real-Time</h1>
+    <img id="video" src="{{url_for('video')}}" width="720" height="480" alt="video stream not Loading">
 </body>
 </html>
